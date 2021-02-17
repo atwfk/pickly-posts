@@ -5,6 +5,9 @@ import Toggle from "../../../Atoms/Toggle/Toggle";
 import { tabGroupData } from "../../TabGroup/data";
 import { useDispatch } from "react-redux";
 import { addPostCreator } from "../../../../store/actions/posts";
+import OptionGroup from "../../../Molecules/OptionGroup/OptionGroup";
+import ImagePoll from "./ImagePoll";
+import TextDefault from "../../../Molecules/TextDefault/TextDefault";
 
 const PostType = ({ active }) => {
   const [data, setData] = useState(tabGroupData());
@@ -40,9 +43,18 @@ const PostType = ({ active }) => {
             onChange={(e) => setInputVal(e.target.value)}
           />
         </div>
-        {data.map((component, index) => (
-          <div key={index}>{component.active ? component.component : null}</div>
-        ))}
+        {data.map((tab, i) => {
+          if (tab.active) {
+            switch (tab.content) {
+              case "Image Poll":
+                return <ImagePoll key={i} />;
+              case "Text Poll":
+                return <TextDefault key={i} />;
+              case "Mini survey":
+                return <OptionGroup key={i} />;
+            }
+          }
+        })}
         <div className="h-32 md:hidden w-full bg-transparent"></div>
       </div>
       <div className="md:bg-white md:shadow-soft md:rounded-b-md border-b border-grey-shd6 md:border-none flex p-m md:mb-10">

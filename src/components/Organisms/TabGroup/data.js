@@ -1,7 +1,4 @@
 import React from "react";
-import OptionGroup from "../../Molecules/OptionGroup/OptionGroup";
-import ImagePoll from "../PostEdit/components/ImagePoll";
-import TextDefault from "../../Molecules/TextDefault/TextDefault";
 
 export const tabGroupData = () => {
   return [
@@ -29,7 +26,6 @@ export const tabGroupData = () => {
           ></path>
         </svg>
       ),
-      component: <ImagePoll />,
       content: "Image Poll",
       active: true,
     },
@@ -49,7 +45,6 @@ export const tabGroupData = () => {
           ></path>
         </svg>
       ),
-      component: <TextDefault />,
       content: "Text Poll",
       active: false,
     },
@@ -73,8 +68,7 @@ export const tabGroupData = () => {
           ></path>
         </svg>
       ),
-      component: <OptionGroup />,
-      content: "One more poll type",
+      content: "Mini survey",
       active: false,
     },
   ];
