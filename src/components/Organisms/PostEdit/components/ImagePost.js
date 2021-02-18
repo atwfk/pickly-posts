@@ -8,7 +8,6 @@ const useCloudinaryUploader = (file) => {
   const [response, setResponse] = useState({});
   const [progress, setProgress] = useState(0);
   const [uploaded, setUploaded] = useState(false);
-
   useEffect(() => {
     const data = new FormData();
     data.append("file", file);
@@ -24,7 +23,6 @@ const useCloudinaryUploader = (file) => {
       })
       .then((res) => {
         const data = res.data;
-
         setResponse(data);
         setUploaded(true);
       })
@@ -33,13 +31,11 @@ const useCloudinaryUploader = (file) => {
   return { response, progress, uploaded };
 };
 // return data, progress, uploaded
-
 const ImagePost = ({ alpha, file }) => {
   // States
   const [fileUrl, setFileUrl] = useState("");
   const { response, progress, uploaded } = useCloudinaryUploader(file);
   const dispatch = useDispatch();
-
   // Transfrom images to  base64
   useEffect(() => {
     const fileReader = new FileReader();

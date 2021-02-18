@@ -1,11 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import TextDefault from "../../TextDefault/TextDefault";
 
-const OptionGroupBox = ({ click, id }) => {
-  const [inputData, setInputData] = useState("");
+const OptionGroupBox = (props) => {
+  const {
+    click,
+    id,
+    changed,
+    groupName,
+    addOptionGroup,
+    setAddOptionGroup,
+  } = props;
   const [inputChecked, setInputChecked] = useState(false);
+  const optionBox = useRef();
   return (
-    <div className="misc-box flex flex-col bg-grey-bg p-m mb-xs rounded-md">
+    <div
+      className="misc-box flex flex-col bg-grey-bg p-m mb-xs rounded-md"
+      ref={optionBox}
+      id={id}
+    >
       <div className="flex items-center justify-between mb-m">
         <input
           className={`font-normal text-sm text-dark placeholder-dark focus:outline-none bg-accent-shd7 ${
@@ -13,14 +25,15 @@ const OptionGroupBox = ({ click, id }) => {
           }`}
           type="text"
           placeholder="Typing a new group name here|"
-          onChange={(e) => setInputData(e.target.value)}
+          onChange={changed}
+          id={id}
         />
         <h3
           className={`font-normal text-sm text-dark-grey ${
             inputChecked ? "inline-block" : "hidden"
           }`}
         >
-          {inputData}
+          {groupName}
         </h3>
         <svg
           className={`${inputChecked ? "inline-block" : "hidden"}`}
@@ -81,7 +94,11 @@ const OptionGroupBox = ({ click, id }) => {
           </svg>
         </div>
       </div>
-      <TextDefault />
+      <TextDefault
+        addOptionGroup={addOptionGroup}
+        setAddOptionGroup={setAddOptionGroup}
+        optionBox={optionBox}
+      />
     </div>
   );
 };

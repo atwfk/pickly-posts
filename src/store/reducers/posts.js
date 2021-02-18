@@ -6,12 +6,18 @@ const posts = (state = [], action) => {
     case actionTypes.START_POST:
       return [
         ...state,
-        { type: "", postTitle: "", fileUrls: [], favorites: [] },
+        {
+          type: "",
+          postTitle: "",
+          fileUrls: [],
+          favorites: [],
+          miniSurvey: [],
+        },
       ];
     case actionTypes.ADD_IMAGES:
       return state.map((post, i) => {
         if (stateLen === i + 1) {
-          post.fileUrls = action.payload.fileUrls;
+          post.fileUrls = [...post.fileUrls, action.payload.fileUrls];
         }
         return post;
       });
@@ -27,6 +33,7 @@ const posts = (state = [], action) => {
         if (stateLen === i + 1) {
           post.type = action.payload.type;
           post.postTitle = action.payload.postTitle;
+          post.miniSurvey = action.payload.miniSurvey;
         }
         return post;
       });

@@ -1,22 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import AddOption from "./components/AddOption";
 import OptionInput from "./components/OptionInput";
-import { useDispatch } from "react-redux";
-import { addFavoritesCreator } from "../../../store/actions/posts";
 
-const TextDefault = () => {
+const TextDefault = (props) => {
   const [addOption, setAddOption] = useState([
     { id: 1, value: "" },
     { id: 2, value: "" },
   ]);
-  const dispatch = useDispatch();
-  useEffect(() => {
-    const options = [];
-    addOption.map((option) => {
-      options.push(option.value);
-    });
-    dispatch(addFavoritesCreator(options));
-  }, [addOption]);
+  const { setTextInputs, addOptionGroup, setAddOptionGroup, optionBox } = props;
   // const alpha = "abcdefghijklmnopqrstuvwxyz".toUpperCase();
   //  Alphabet letters
   const letters = (() => {
@@ -26,7 +17,6 @@ const TextDefault = () => {
   const addOptionHandler = () => {
     const numbers = "123456789";
     const randId = Math.floor(Math.random() * numbers);
-    //alpha: alpha[id - 1]
     setAddOption([...addOption, { id: randId, value: "" }]);
   };
   const removeOptionHandler = (e) => {
@@ -35,14 +25,29 @@ const TextDefault = () => {
     );
   };
   const inputValHandler = (e) => {
+    let inpuVals = [];
     setAddOption(
       addOption.map((option) => {
         if (e.target.id === option.id.toString()) {
           option.value = e.target.value;
         }
+        inpuVals.push(option.value);
         return option;
       })
     );
+    if (setTextInputs) {
+      setTextInputs(addOption);
+    }
+    if (setAddOptionGroup) {
+      setAddOptionGroup(
+        addOptionGroup.map((optionGroup) => {
+          if (optionGroup.id == optionBox.current.id) {
+            optionGroup.optionInpVals = inpuVals;
+          }
+          return optionGroup;
+        })
+      );
+    }
   };
   return (
     <div className="flex flex-col">
@@ -63,7 +68,6 @@ const TextDefault = () => {
         })}
       </div>
       <AddOption click={addOptionHandler} />
-      <button onClick={() => console.log(addOption)}>Click Here</button>
     </div>
   );
 };

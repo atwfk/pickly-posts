@@ -8,20 +8,37 @@ import { addPostCreator } from "../../../../store/actions/posts";
 import OptionGroup from "../../../Molecules/OptionGroup/OptionGroup";
 import ImagePoll from "./ImagePoll";
 import TextDefault from "../../../Molecules/TextDefault/TextDefault";
+import { addFavoritesCreator } from "../../../../store/actions/posts";
 
 const PostType = ({ active }) => {
   const [data, setData] = useState(tabGroupData());
   const [inputVal, setInputVal] = useState("");
+  const [textInputs, setTextInputs] = useState([]);
+  const [addOptionGroup, setAddOptionGroup] = useState([
+    { id: 1, optionName: "", optionInpVals: null },
+  ]);
   const dispatch = useDispatch();
   const addPost = () => {
     let postType = "";
     data.map((item) => {
       if (item.active === true) {
         postType = item.content;
-        console.log(item.component);
       }
+      return item;
     });
-    dispatch(addPostCreator(postType, inputVal));
+    let options = [];
+    if (textInputs) {
+      textInputs.map((option) => {
+        options.push(option.value);
+        return option;
+      });
+    }
+    dispatch(addFavoritesCreator(options));
+    dispatch(addPostCreator(postType, inputVal, addOptionGroup));
+    setAddOptionGroup([]);
+    setInputVal("");
+    options = [];
+    setTextInputs([]);
   };
   return (
     <div
@@ -49,11 +66,20 @@ const PostType = ({ active }) => {
               case "Image Poll":
                 return <ImagePoll key={i} />;
               case "Text Poll":
-                return <TextDefault key={i} />;
+                return <TextDefault key={i} setTextInputs={setTextInputs} />;
               case "Mini survey":
-                return <OptionGroup key={i} />;
+                return (
+                  <OptionGroup
+                    key={i}
+                    addOptionGroup={addOptionGroup}
+                    setAddOptionGroup={setAddOptionGroup}
+                  />
+                );
+              default:
+                return tab;
             }
           }
+          return true;
         })}
         <div className="h-32 md:hidden w-full bg-transparent"></div>
       </div>

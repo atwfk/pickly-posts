@@ -14,7 +14,7 @@ export const addFavoritesCreator = (favorites) => ({
   payload: { favorites },
 });
 
-export const addPostCreator = (type, postTitle) => ({
+export const addPostCreator = (type, postTitle, miniSurvey) => ({
   type: actionTypes.ADD_POST,
-  payload: { type, postTitle },
+  payload: { type, postTitle, miniSurvey },
 });
