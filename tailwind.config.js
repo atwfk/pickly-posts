@@ -68,6 +68,7 @@ module.exports = {
         shd7: "#F2F9FF",
         bg: "#FAFAFC",
         bg2: "#F8F7FA",
+        bg3: '#E5E5E5'
       },
       white: {
         DEFAULT: "#FFFFFF",
@@ -117,6 +118,8 @@ module.exports = {
         "3xl": "3rem",
         "4xl": "4rem",
         "5xl": "8rem",
+        xxsv: '0.375rem',
+        xsvv: '0.625rem',
       },
 
       backgroundOpacity: {
@@ -137,6 +140,13 @@ module.exports = {
         "8xl": "8.8125rem",
         "4sxl": "4.1875rem",
         "18xl": "18.5rem",
+        '30xl': '30rem',
+        '33xl': '33.25rem',
+        '32xl': '32.625rem',
+        '35xl': '35.25rem',
+        '29xl': '29.5rem',
+        '28xl': '28.5rem',
+        '2xl': '2.625rem',
       },
       height: {
         "61xl": "61.0625rem",
