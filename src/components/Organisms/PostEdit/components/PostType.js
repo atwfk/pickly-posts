@@ -4,11 +4,10 @@ import filled from "../../../../img/large-avatar.png";
 import Toggle from "../../../Atoms/Toggle/Toggle";
 import { tabGroupData } from "../../TabGroup/data";
 import { useDispatch } from "react-redux";
-import { addPostCreator } from "../../../../store/actions/posts";
 import OptionGroup from "../../../Molecules/OptionGroup/OptionGroup";
 import ImagePoll from "./ImagePoll";
 import TextDefault from "../../../Molecules/TextDefault/TextDefault";
-import { addFavoritesCreator } from "../../../../store/actions/posts";
+import { addFavorites, postAdded } from "../../../../store/reducers/posts";
 
 const PostType = ({ active }) => {
   const [data, setData] = useState(tabGroupData());
@@ -33,8 +32,8 @@ const PostType = ({ active }) => {
         return option;
       });
     }
-    dispatch(addFavoritesCreator(options));
-    dispatch(addPostCreator(postType, inputVal, addOptionGroup));
+    dispatch(postAdded(postType, inputVal, addOptionGroup));
+    dispatch(addFavorites(options));
     setAddOptionGroup([]);
     setInputVal("");
     options = [];

@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import filled from "../../../img/large-avatar.png";
 import PostType from "./components/PostType";
 import { useDispatch } from "react-redux";
-import { startPostCreator } from "../../../store/actions/posts";
+import { startPost } from "../../../store/reducers/posts";
 
 const PostEdit = () => {
   const [active, setActive] = useState(false);
   const dispatch = useDispatch();
   const inputHandler = () => {
     setActive(true);
-    dispatch(startPostCreator());
+    dispatch(startPost());
   };
   return (
     <div className="flex justify-center relative">

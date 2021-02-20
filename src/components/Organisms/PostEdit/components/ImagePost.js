@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Progress from "../../../Atoms/Progress/Progress";
 import { useDispatch } from "react-redux";
-import { addImagesCreator } from "../../../../store/actions/posts";
+import { addImages } from "../../../../store/reducers/posts";
 
 const useCloudinaryUploader = (file) => {
   const [response, setResponse] = useState({});
@@ -42,7 +42,7 @@ const ImagePost = ({ alpha, file }) => {
     fileReader.readAsDataURL(file);
     fileReader.addEventListener("load", function (e) {
       setFileUrl(e.target.result);
-      dispatch(addImagesCreator(e.target.result));
+      dispatch(addImages(e.target.result));
     });
   }, [file]);
   // Upload Image to server
